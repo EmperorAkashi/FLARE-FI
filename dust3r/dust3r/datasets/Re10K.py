@@ -29,13 +29,13 @@ from decord import VideoReader
 from collections import OrderedDict
 import numpy as np
 from einops import rearrange
-from jaxtyping import Float
+from jaxtyping import Float, Tuple
 from PIL import Image
 from torch import Tensor
 
 def rescale(
     image: Float[Tensor, "3 h_in w_in"],
-    shape: tuple[int, int],
+    shape: Tuple[int, int],
 ) -> Float[Tensor, "3 h_out w_out"]:
     h, w = shape
     image_new = (image * 255).clip(min=0, max=255).type(torch.uint8)
@@ -50,8 +50,8 @@ def rescale(
 def center_crop(
     images: Float[Tensor, "*#batch c h w"],
     intrinsics: Float[Tensor, "*#batch 3 3"],
-    shape: tuple[int, int],
-) -> tuple[
+    shape: Tuple[int, int],
+) -> Tuple[
     Float[Tensor, "*#batch c h_out w_out"],  # updated images
     Float[Tensor, "*#batch 3 3"],  # updated intrinsics
 ]:
@@ -76,8 +76,8 @@ def center_crop(
 def rescale_and_crop(
     images: Float[Tensor, "*#batch c h w"],
     intrinsics: Float[Tensor, "*#batch 3 3"],
-    shape: tuple[int, int],
-) -> tuple[
+    shape: Tuple[int, int],
+) -> Tuple[
     Float[Tensor, "*#batch c h_out w_out"],  # updated images
     Float[Tensor, "*#batch 3 3"],  # updated intrinsics
 ]:
@@ -117,8 +117,8 @@ def rescale(
 def center_crop(
     images: Float[Tensor, "*#batch c h w"],
     intrinsics: Float[Tensor, "*#batch 3 3"],
-    shape: tuple[int, int],
-) -> tuple[
+    shape: Tuple[int, int],
+) -> Tuple[
     Float[Tensor, "*#batch c h_out w_out"],  # updated images
     Float[Tensor, "*#batch 3 3"],  # updated intrinsics
 ]:
