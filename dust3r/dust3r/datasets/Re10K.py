@@ -29,7 +29,8 @@ from decord import VideoReader
 from collections import OrderedDict
 import numpy as np
 from einops import rearrange
-from jaxtyping import Float, Tuple
+from jaxtyping import Float
+from typing import Tuple
 from PIL import Image
 from torch import Tensor
 
